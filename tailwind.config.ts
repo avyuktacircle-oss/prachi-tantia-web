@@ -5,9 +5,23 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      colors: {
+        brand: {
+          navy: "#075A82",
+          teal: "#367999",
+          sky: "#6C9DB4",
+          gold: "#E5AB30",
+          goldLight: "#EABB58",
+        },
+      },
+      fontFamily: {
+        sans: ["var(--font-poppins)", "system-ui", "sans-serif"],
+        body: ["var(--font-open-sans)", "system-ui", "sans-serif"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
