@@ -38,4 +38,15 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  /* Hide scrollbar only on md+ so mobile users see the native horizontal bar */
+  @media (min-width: 768px) {
+    .scrollbar-hidden-md {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hidden-md::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

@@ -7,7 +7,7 @@ type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
-  as?: "div" | "section";
+  as?: "div" | "section" | "li";
   id?: string;
 };
 
@@ -21,7 +21,7 @@ export function Reveal({
   const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {
-    const Tag = as === "section" ? "section" : "div";
+    const Tag = as === "section" ? "section" : as === "li" ? "li" : "div";
     return (
       <Tag className={className} id={id}>
         {children}
@@ -29,7 +29,7 @@ export function Reveal({
     );
   }
 
-  const MotionTag = as === "section" ? motion.section : motion.div;
+  const MotionTag = as === "section" ? motion.section : as === "li" ? motion.li : motion.div;
 
   return (
     <MotionTag
