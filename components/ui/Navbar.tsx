@@ -5,13 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
-
-const links: { label: string; href: string; external?: boolean }[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Speaking", href: "/speaking" },
-  { label: "Connect", href: "/connect" },
-];
+import { mainNavLinks as links } from "@/lib/mainNavLinks";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +28,7 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
+        scrolled || open
           ? "bg-brand-ink/98 shadow-lg shadow-black/40 backdrop-blur-md"
           : "bg-gradient-to-b from-black/70 to-transparent backdrop-blur-none",
       )}
@@ -79,7 +73,10 @@ export function Navbar() {
           aria-controls="mobile-menu"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
-          className="inline-flex items-center justify-center rounded p-2 text-white/80 transition-colors hover:text-brand-goldLight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-goldLight lg:hidden"
+          className={cn(
+            "inline-flex items-center justify-center rounded p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-goldLight lg:hidden",
+            open ? "text-brand-goldLight" : "text-white/80 hover:text-brand-goldLight",
+          )}
           onClick={() => setOpen((v) => !v)}
           type="button"
         >

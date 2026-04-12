@@ -73,30 +73,6 @@ export function StoryNarrative() {
               </Reveal>
             ))}
           </div>
-
-          {/* Invitation block */}
-          <Reveal delay={0.1}>
-            <div className="mt-20 rounded-2xl border-l-4 border-brand-goldLight bg-neutral-50 px-8 py-10">
-              <p className="font-body text-sm font-bold uppercase tracking-widest text-brand-gold">
-                Your Invitation
-              </p>
-              <h3 className="mt-2 font-sans text-2xl font-bold text-neutral-900">
-                Return to Your Power
-              </h3>
-              <p className="mt-5 font-body text-base leading-relaxed text-neutral-600">
-                If you are walking an unconventional road right now, let this be
-                your reminder: you are not lost\u2014you are being called. You
-                are being asked to evolve, not escape. You don\u2019t need a
-                different background to create a meaningful life; you simply
-                need the courage to believe your vision deserves space.
-              </p>
-              <p className="mt-5 font-body text-base leading-relaxed text-neutral-600">
-                Mind transformation isn\u2019t about changing who you are.
-                It\u2019s about returning to the power of who you\u2019ve
-                always been.
-              </p>
-            </div>
-          </Reveal>
         </div>
       </Container>
     </Reveal>

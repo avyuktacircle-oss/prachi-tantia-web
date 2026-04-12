@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutStats } from "@/components/sections/about/AboutStats";
-import { JourneyCTA } from "@/components/sections/journey/JourneyCTA";
 import { JourneyIntroSlim } from "@/components/sections/journey/JourneyIntroSlim";
 import { StoryNarrative } from "@/components/sections/journey/StoryNarrative";
 import { TimelineSection } from "@/components/sections/journey/TimelineSection";
@@ -26,7 +25,6 @@ export default function AboutPage() {
       <JourneyIntroSlim />
       <StoryNarrative />
       <TimelineSection />
-      <JourneyCTA />
     </main>
   );
 }

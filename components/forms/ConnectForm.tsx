@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 
 const field =
-  "w-full min-h-[48px] rounded-md border-2 border-brand-navy/15 bg-white px-4 font-body text-brand-navy placeholder:text-brand-teal/45 focus:border-brand-goldLight focus:outline-none focus:ring-2 focus:ring-brand-goldLight/35";
+  "w-full min-h-[48px] rounded-md border-2 border-white/10 bg-brand-ink px-4 font-body text-white placeholder:text-white/30 focus:border-brand-goldLight focus:outline-none focus:ring-2 focus:ring-brand-goldLight/35";
 
-const label = "mb-1.5 block font-sans text-sm font-semibold text-brand-navy";
+const label = "mb-1.5 block font-sans text-sm font-semibold text-neutral-300";
 
 const REASONS = [
   "Press, Media, or Partnership Inquiry",
@@ -54,7 +54,7 @@ export function ConnectForm() {
         return;
       }
       setStatus("ok");
-      setMessage("Thank you — your message was sent to Prachi’s team.");
+      setMessage("Thank you — your message was sent to Prachi's team.");
       form.reset();
     } catch {
       setStatus("err");
@@ -63,24 +63,29 @@ export function ConnectForm() {
   }
 
   return (
-    <div className="rounded-2xl border border-brand-sky/25 bg-white p-8 shadow-md md:p-10">
-      <h2 className="font-sans text-2xl font-bold text-brand-navy md:text-3xl">
+    <div className="rounded-2xl border border-white/10 bg-brand-ink p-8 shadow-md md:p-10">
+      <h2 className="font-sans text-2xl font-bold text-white md:text-3xl">
         Send a message
       </h2>
-      <p className="mt-3 font-body text-base leading-relaxed text-brand-teal">
+      <p className="mt-3 font-body text-base leading-relaxed text-neutral-400">
         For all other inquiries, please use this form to get in touch with
-        Prachi’s team.
+        Prachi&apos;s team.
       </p>
 
       <form className="mt-8 space-y-6" onSubmit={onSubmit}>
         <div>
           <label className={label} htmlFor="cf-reason">
-            Reason for contact <span className="text-red-600">*</span>
+            Reason for contact <span className="text-red-400">*</span>
           </label>
-          <select className={field} id="cf-reason" name="reason" required>
-            <option value="">Select…</option>
+          <select
+            className={cn(field, "cursor-pointer")}
+            id="cf-reason"
+            name="reason"
+            required
+          >
+            <option value="" className="bg-brand-ink">Select…</option>
             {REASONS.map((r) => (
-              <option key={r} value={r}>
+              <option key={r} value={r} className="bg-brand-ink">
                 {r}
               </option>
             ))}
@@ -148,10 +153,10 @@ export function ConnectForm() {
           />
         </div>
 
-        <div className="space-y-3 font-body text-sm text-brand-teal">
+        <div className="space-y-3 font-body text-sm text-neutral-400">
           <label className="flex cursor-pointer items-start gap-3">
             <input
-              className="mt-1 h-4 w-4 shrink-0 accent-brand-navy"
+              className="mt-1 h-4 w-4 shrink-0 accent-brand-goldLight"
               name="optInUpdates"
               type="checkbox"
             />
@@ -161,13 +166,13 @@ export function ConnectForm() {
           </label>
           <label className="flex cursor-pointer items-start gap-3">
             <input
-              className="mt-1 h-4 w-4 shrink-0 accent-brand-navy"
+              className="mt-1 h-4 w-4 shrink-0 accent-brand-goldLight"
               name="optInNewsletter"
               type="checkbox"
             />
-            <span>Yes! Also, sign me up for Prachi’s newsletter.</span>
+            <span>Yes! Also, sign me up for Prachi&apos;s newsletter.</span>
           </label>
-          <p className="text-xs text-brand-teal/80">
+          <p className="text-xs text-neutral-600">
             You can unsubscribe from these communications at any time.
           </p>
         </div>
@@ -185,7 +190,7 @@ export function ConnectForm() {
           <p
             className={cn(
               "font-body text-sm",
-              status === "ok" ? "text-brand-navy" : "text-red-600",
+              status === "ok" ? "text-brand-goldLight" : "text-red-400",
             )}
             role="status"
           >

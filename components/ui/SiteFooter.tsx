@@ -1,21 +1,8 @@
 import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
+import { mainNavLinks } from "@/lib/mainNavLinks";
 import { siteSocialLinks } from "@/lib/siteSocial";
-
-const quickLinks: { label: string; href: string; note?: string }[] = [
-  {
-    label: "Home",
-    href: "/",
-    note: "Teaching videos & community moments",
-  },
-  { label: "About", href: "/about" },
-  { label: "Programs", href: "/programs" },
-  { label: "Speaking", href: "/speaking" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Blog", href: "/blog" },
-  { label: "Connect", href: "/connect" },
-];
 
 export function SiteFooter() {
   return (
@@ -27,11 +14,6 @@ export function SiteFooter() {
             <p className="font-sans text-xl font-semibold tracking-wide text-white">
               Prachi<span className="ml-2">Tantia</span>
             </p>
-            <address className="mt-5 not-italic font-body text-sm leading-relaxed text-neutral-500">
-              Surat, Gujarat
-              <br />
-              India
-            </address>
           </div>
 
           {/* Quick links */}
@@ -40,19 +22,16 @@ export function SiteFooter() {
               Quick links
             </h2>
             <ul className="mt-4 space-y-2 font-body text-sm">
-              {quickLinks.map(({ label, href, note }) => (
+              {mainNavLinks.map(({ label, href, external }) => (
                 <li key={href + label}>
                   <Link
                     className="text-neutral-300 underline-offset-4 transition-colors hover:text-brand-goldLight hover:underline"
                     href={href}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    target={external ? "_blank" : undefined}
                   >
                     {label}
                   </Link>
-                  {note ? (
-                    <span className="mt-0.5 block text-xs text-neutral-600">
-                      {note}
-                    </span>
-                  ) : null}
                 </li>
               ))}
             </ul>
