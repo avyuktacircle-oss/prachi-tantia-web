@@ -2,13 +2,6 @@ import { NextResponse } from "next/server";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const ALLOWED_REASONS = new Set([
-  "Press, Media, or Partnership Inquiry",
-  "Speaking Event Request",
-  "I Want Prachi to Appear On My Podcast",
-  "General Inquiry",
-]);
-
 function str(v: unknown): string {
   return typeof v === "string" ? v.trim() : "";
 }
@@ -33,18 +26,10 @@ export async function POST(request: Request) {
 
   const o = body as Record<string, unknown>;
 
-  const reason = str(o.reason);
   const firstName = str(o.firstName);
   const lastName = str(o.lastName);
   const email = str(o.email);
-  const message = str(o.message);
-
-  if (!reason || !ALLOWED_REASONS.has(reason)) {
-    return NextResponse.json(
-      { ok: false, error: "Please select a reason for contact." },
-      { status: 400 },
-    );
-  }
+  const eventMode = str(o.eventMode);
 
   if (!firstName || !lastName) {
     return NextResponse.json(
@@ -60,20 +45,19 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!message) {
+  if (!eventMode) {
     return NextResponse.json(
-      { ok: false, error: "Please enter a message." },
+      { ok: false, error: "Please select whether the event is in-person or virtual." },
       { status: 400 },
     );
   }
 
-  const optInUpdates = o.optInUpdates === true;
-  const optInNewsletter = o.optInNewsletter === true;
+  const sessionFormats = Array.isArray(o.sessionFormats)
+    ? o.sessionFormats.filter((x): x is string => typeof x === "string")
+    : [];
 
-  // TODO: Send via Resend / CRM; wire newsletter opt-in to /api/newsletter when ready
-  void optInUpdates;
-  void optInNewsletter;
-  void str(o.subject);
+  // TODO: Send via Resend / CRM / email to team
+  void sessionFormats;
 
   return NextResponse.json({ ok: true });
 }

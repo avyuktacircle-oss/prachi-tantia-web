@@ -1,0 +1,24 @@
+# Firebase App Hosting configuration
+# https://firebase.google.com/docs/app-hosting/configure
+
+# Cloud Run service settings
+runConfig:
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+# Environment variables and secrets.
+# Secrets are stored in Cloud Secret Manager and never checked into source control.
+# To create a secret: firebase apphosting:secrets:set SECRET_NAME
+env:
+  - variable: RESEND_API_KEY
+    secret: RESEND_API_KEY
+    availability:
+      - RUNTIME
+
+  - variable: INSTAGRAM_ACCESS_TOKEN
+    secret: INSTAGRAM_ACCESS_TOKEN
+    availability:
+      - RUNTIME

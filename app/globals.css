@@ -4,18 +4,38 @@
 
 @layer base {
   :root {
-    --foreground-rgb: 7, 90, 130;
-    --background-rgb: 255, 255, 255;
+    --foreground-rgb: 10, 10, 10;
+    --background-rgb: 249, 248, 247;
+    --accent-gold: 229, 171, 48;
+    --accent-teal: 54, 121, 153;
   }
 
   body {
     color: rgb(var(--foreground-rgb));
     background-color: rgb(var(--background-rgb));
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

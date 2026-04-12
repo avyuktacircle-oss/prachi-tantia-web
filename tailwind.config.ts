@@ -16,6 +16,10 @@ const config: Config = {
           sky: "#6C9DB4",
           gold: "#E5AB30",
           goldLight: "#EABB58",
+          ink: "#0a0a0a",
+          inkLight: "#1a1a1a",
+          paper: "#f9f8f7",
+          muted: "#737373",
         },
       },
       fontFamily: {
