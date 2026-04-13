@@ -1,9 +1,13 @@
+import crypto from "crypto";
+
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/firebaseAdmin";
+import { buildWelcomeEmail } from "@/lib/newsletterEmail";
 import { getResend } from "@/lib/resend";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://prachitantia.com";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -32,18 +36,29 @@ export async function POST(request: Request) {
   }
 
   const subscribedAt = new Date().toISOString();
+  const unsubscribeToken = crypto.randomBytes(32).toString("hex");
+  const unsubscribeUrl = `${SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
-  // Run Firestore write and admin notification concurrently.
-  // Promise.allSettled ensures one failure does not block the other.
-  const [firestoreResult, emailResult] = await Promise.allSettled([
-    db.collection("newsletter_subscribers").add({ email, subscribedAt }),
+  const [firestoreResult, adminEmailResult, welcomeEmailResult] = await Promise.allSettled([
+    db.collection("newsletter_subscribers").add({
+      email,
+      subscribedAt,
+      status: "active",
+      unsubscribeToken,
+    }),
     getResend().emails.send({
-      from: "Prachi Tantia Website <noreply@avyuktacircle.com>",
+      from: "Prachi Tantia <noreply@avyuktacircle.com>",
       to: "prachi@avyuktacircle.com",
       subject: "New newsletter subscriber",
       html: `<p>A new subscriber just signed up for your newsletter.</p>
 <p><strong>Email:</strong> ${email}</p>
 <p><strong>Time:</strong> ${subscribedAt}</p>`,
+    }),
+    getResend().emails.send({
+      from: "Prachi Tantia <prachi@avyuktacircle.com>",
+      to: email,
+      subject: "Welcome to the Circle | Your Monday ritual starts now",
+      html: buildWelcomeEmail(unsubscribeUrl),
     }),
   ]);
 
@@ -55,9 +70,12 @@ export async function POST(request: Request) {
     );
   }
 
-  if (emailResult.status === "rejected") {
-    // Log but do not surface to the user — subscription succeeded.
-    console.error("[newsletter] Admin notification email failed:", emailResult.reason);
+  if (adminEmailResult.status === "rejected") {
+    console.error("[newsletter] Admin notification email failed:", adminEmailResult.reason);
+  }
+
+  if (welcomeEmailResult.status === "rejected") {
+    console.error("[newsletter] Welcome email failed:", welcomeEmailResult.reason);
   }
 
   return NextResponse.json({ ok: true });

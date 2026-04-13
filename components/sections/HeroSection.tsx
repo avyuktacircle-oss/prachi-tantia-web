@@ -92,7 +92,7 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-4">
               <Button
                 className="px-8 py-4"
-                href="https://avyuktacircle.org"
+                href="https://avyuktacircle.com"
                 rel="noopener noreferrer"
                 target="_blank"
                 variant="primary"

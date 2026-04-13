@@ -10,6 +10,7 @@
     "deploy:hosting": "firebase deploy --only hosting --project prachiwebsite"
   },
   "dependencies": {
+    "@google-cloud/scheduler": "^5.3.1",
     "autoprefixer": "^10.4.27",
     "chart.js": "4.5.1",
     "firebase-admin": "^13.8.0",

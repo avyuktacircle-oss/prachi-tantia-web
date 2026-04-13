@@ -22,3 +22,23 @@ env:
     secret: INSTAGRAM_ACCESS_TOKEN
     availability:
       - RUNTIME
+
+  - variable: NEWSLETTER_ADMIN_SECRET
+    secret: NEWSLETTER_ADMIN_SECRET
+    availability:
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://prachitantia.com
+    availability:
+      - RUNTIME
+
+  - variable: GCP_SCHEDULER_LOCATION
+    value: asia-south1
+    availability:
+      - RUNTIME
+
+  - variable: SCHEDULER_JOB_NAME
+    value: newsletter-broadcast
+    availability:
+      - RUNTIME

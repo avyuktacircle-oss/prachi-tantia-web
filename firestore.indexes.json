@@ -1,0 +1,12 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "newsletter_broadcasts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "sentAt", "order": "DESCENDING" }
+      ]
+    },
+  ],
+  "fieldOverrides": []
+}

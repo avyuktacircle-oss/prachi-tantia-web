@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Poppins } from "next/font/google";
 
-import { Navbar } from "@/components/ui/Navbar";
-import { SiteFooter } from "@/components/ui/SiteFooter";
+import { SiteChrome } from "@/components/ui/SiteChrome";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -38,9 +37,9 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${openSans.variable} font-body antialiased`}
       >
-        <Navbar />
-        {children}
-        <SiteFooter />
+        <SiteChrome>
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );
